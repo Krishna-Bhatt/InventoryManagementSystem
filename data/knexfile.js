@@ -3,16 +3,16 @@
 /**
  * @type { Object.<string, import("knex").Knex.Config> }
  */
-
+require('dotenv').config({path: '../.env'});
 module.exports = {
   development: {
-    client: 'pg',
-    connection: 'postgres://localhost/inventory_system',
+    client: process.env.CLIENT,
+    connection: process.env.DB_URL,
     migrations: {
-      directory: 'server/src/db/migrations',
+      directory: './migrations',
     },
     seeds: {
-      directory: 'server/src/db/seeds',
+      directory: './seeds',
     },
   },
 };

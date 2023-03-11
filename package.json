@@ -1,17 +1,24 @@
 {
   "name": "inventorymanagementsystem",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js",
+    "migrate": "knex migrate:latest --knexfile ./data/knexfile",
+    "seed": "knex seed:run --knexfile ./data/knexfile"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
     "knex": "^2.4.2",
     "knex-migrate": "^1.7.4",
     "pg": "^8.10.0"
-  }
+  },
+  "devDependencies": {
+    "node-env-run": "^4.0.2"
+  },
+  "description": ""
 }
