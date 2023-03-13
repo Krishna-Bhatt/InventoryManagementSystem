@@ -1,6 +1,6 @@
-
 const express =  require('express');
 const app = express();
+require('./services/updateStatus');
 
 //middlewares
 app.use(express.json());

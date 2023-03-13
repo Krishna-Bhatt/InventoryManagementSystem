@@ -1,9 +1,4 @@
-const { Pool } = require('pg');
-
-const pool = new Pool({
-    connectionString: process.env.DB_URL|| 'postgres://localhost/inventory_system',
-    ssl: process.env.DB_URL ? true : false
-})
+const {pool} = require('../services/config');
 
 const deleteBookInventory = async (req,res) => {
     const id = req.params.id;
@@ -22,9 +17,9 @@ const deleteBookInventory = async (req,res) => {
           text: 'DELETE FROM inventory WHERE book_id = $1',
           values: [id],
         };
-        const inventoryRes = await pool.query(inventoryQuery); 
+        await pool.query(inventoryQuery); 
         await pool.query('COMMIT'); // commit the transaction
-        res.status(200).json(bookRes.rowCount);
+        res.status(200).json({"Updated rows":bookRes.rowCount});
       } catch (err) {
         await pool.query('ROLLBACK'); // rollback the transaction if an error occurs
         console.error(err);
@@ -34,8 +29,23 @@ const deleteBookInventory = async (req,res) => {
   }
 
 const updateStocks = async (req,res) =>{
-    
+    const id = req.params.id;
+    const {quantity} = req.body;
+    let time = new Date();
+    let book_status = "out_of_stock";
+    if(quantity>0){
+      book_status = "in_stock";
+    }
+    try{
+        const response = await pool.query('UPDATE inventory SET quantity = $1, book_status = $2, updated_at = $3 WHERE id = $4',[quantity,book_status,time,id]);
+        res.status(200).json({"Updated rows ":response.rowCount});
+    }
+    catch(err){
+        console.log(err);
+        res.send("Error: "+err);
+    }
 }
   module.exports = {
-    deleteBookInventory
+    deleteBookInventory,
+    updateStocks
   }

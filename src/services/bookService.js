@@ -1,10 +1,4 @@
-const { Pool } = require('pg');
-
-const pool = new Pool({
-    connectionString: process.env.DB_URL|| 'postgres://localhost/inventory_system',
-    ssl: process.env.DB_URL ? true : false
-})
-
+const {pool} = require('../services/config');
 const getBooks = async (req,res)=>{
   try
   {
