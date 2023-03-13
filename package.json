@@ -1,11 +1,12 @@
 {
   "name": "inventorymanagementsystem",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "index",
   "scripts": {
-    "start": "node index.js",
+    "start": "node src/index.js",
     "migrate": "knex migrate:latest --knexfile ./data/knexfile",
-    "seed": "knex seed:run --knexfile ./data/knexfile"
+    "seed": "knex seed:run --knexfile ./data/knexfile",
+    "rollback": "knex migrate:rollback --knexfile ./data/knexfile"
   },
   "keywords": [],
   "author": "",
