@@ -8,6 +8,7 @@ The folowing is the folder structure used:
 data\
 ----migrations
 ----seeds
+
 src\
 ----routes
 ----services
