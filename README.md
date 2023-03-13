@@ -7,10 +7,12 @@ The folowing is the folder structure used:
 
 data\
 ----migrations
+
 ----seeds
 
 src\
 ----routes
+
 ----services
 
 The data directory conatins migration and seed files. The src folder contains routes and service files. In order to run this project, follow the following steps:
